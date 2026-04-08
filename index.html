@@ -1,0 +1,194 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.bp-wrap{width:100%;overflow-x:auto;padding:0 0 1.5rem}
+.bp-table{border-collapse:separate;border-spacing:0;min-width:1600px;width:100%}
+.phase-num{font-size:18px;font-weight:500;opacity:0.25;line-height:1}
+.phase-label{font-size:10px;font-weight:500;line-height:1.3;margin-top:4px}
+.row-label-cell{width:140px;min-width:140px;padding:10px 12px;vertical-align:middle;position:sticky;left:0;z-index:10}
+.row-label-title{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;line-height:1.3}
+.row-label-sub{font-size:9px;opacity:.7;margin-top:3px;font-style:italic}
+.cell{padding:6px;vertical-align:top;border-left:1px solid rgba(0,0,0,.06)}
+.card{border-radius:6px;padding:8px 10px;font-size:10px;line-height:1.45;height:100%;min-height:72px}
+.line-row td{padding:0;height:8px}
+.separator-line{height:2px;width:100%;display:block}
+.dashed-line{border-top:2px dashed;width:100%;display:block;height:1px;margin:4px 0}
+.time-cell{text-align:center;font-size:11px;font-weight:500;padding:10px 4px;vertical-align:middle}
+.phase-header{text-align:center;padding:12px 8px 10px;vertical-align:middle}
+.stand-badge{font-size:9px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;display:inline-block;margin-top:4px}
+.insight-bar{background:var(--color-background-secondary);border-radius:8px;padding:10px 16px;margin-top:12px;font-size:10px;line-height:1.6;color:var(--color-text-secondary)}
+.insight-bar strong{color:var(--color-text-primary);font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--color-text-secondary)}
+.legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+</style>
+
+<div class="bp-wrap">
+
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+  <div>
+    <div style="font-size:13px;font-weight:500;color:var(--color-text-primary)">Service Blueprint — i-Homotic</div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px">Experiencia omnicanal: Sitio web React + Stand Feria del Diseño EAFIT · 2026</div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#B5D4F4"></div>Acciones usuario</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#9FE1CB"></div>Frontstage</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#CECBF6"></div>Backstage</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FAC775"></div>Soporte</div>
+    <div class="legend-item"><div class="legend-dot" style="border:1.5px dashed #E8721A;background:transparent"></div>Stand físico</div>
+  </div>
+</div>
+
+<table class="bp-table">
+<colgroup>
+  <col style="width:140px">
+  <col style="width:148px"><col style="width:148px"><col style="width:148px"><col style="width:148px"><col style="width:148px">
+  <col style="width:148px"><col style="width:148px"><col style="width:148px">
+  <col style="width:148px"><col style="width:148px">
+</colgroup>
+<tbody>
+
+<!-- FASES HEADER -->
+<tr>
+  <td style="background:var(--color-background-primary);position:sticky;left:0;z-index:11;border-bottom:2px solid #2D6A2E"></td>
+  <td class="phase-header" style="background:#2D6A2E;border-radius:6px 0 0 0"><div class="phase-num" style="color:#fff">01</div><div class="phase-label" style="color:#c8e6c9">Descubrimiento<br>digital</div></td>
+  <td class="phase-header" style="background:#4c7b45"><div class="phase-num" style="color:#fff">02</div><div class="phase-label" style="color:#c8e6c9">Exploración del<br>portafolio</div></td>
+  <td class="phase-header" style="background:#2D6A2E"><div class="phase-num" style="color:#fff">03</div><div class="phase-label" style="color:#c8e6c9">Educación y<br>comprensión</div></td>
+  <td class="phase-header" style="background:#4c7b45"><div class="phase-num" style="color:#fff">04</div><div class="phase-label" style="color:#c8e6c9">Validación<br>económica</div></td>
+  <td class="phase-header" style="background:#2D6A2E"><div class="phase-num" style="color:#fff">05</div><div class="phase-label" style="color:#c8e6c9">Contacto<br>directo</div></td>
+  <td class="phase-header" style="background:#E8721A;border-top:3px solid #E8721A"><div class="phase-num" style="color:#fff">06</div><div class="phase-label" style="color:#fff3e0">Llegada<br>al stand</div><div class="stand-badge" style="background:rgba(255,255,255,.2);color:#fff">Stand ↓</div></td>
+  <td class="phase-header" style="background:#d45e0a;border-top:3px solid #E8721A"><div class="phase-num" style="color:#fff">07</div><div class="phase-label" style="color:#fff3e0">Demo<br>presencial</div><div class="stand-badge" style="background:rgba(255,255,255,.2);color:#fff">Stand ↓</div></td>
+  <td class="phase-header" style="background:#E8721A;border-top:3px solid #E8721A"><div class="phase-num" style="color:#fff">08</div><div class="phase-label" style="color:#fff3e0">Decisión<br>de compra</div><div class="stand-badge" style="background:rgba(255,255,255,.2);color:#fff">Stand ↓</div></td>
+  <td class="phase-header" style="background:#4c7b45"><div class="phase-num" style="color:#fff">09</div><div class="phase-label" style="color:#c8e6c9">Post-<br>consulta</div></td>
+  <td class="phase-header" style="background:#2D6A2E;border-radius:0 6px 0 0"><div class="phase-num" style="color:#fff">10</div><div class="phase-label" style="color:#c8e6c9">Seguimiento<br>y expansión</div></td>
+</tr>
+
+<!-- TIEMPO -->
+<tr>
+  <td class="row-label-cell" style="background:#2D6A2E"><div class="row-label-title" style="color:#fff">Tiempo estimado</div></td>
+  <td class="time-cell" style="color:#2D6A2E;background:#E8F5E9">1–3 min</td>
+  <td class="time-cell" style="color:#2D6A2E;background:#E8F5E9">3–8 min</td>
+  <td class="time-cell" style="color:#2D6A2E;background:#E8F5E9">5–10 min</td>
+  <td class="time-cell" style="color:#2D6A2E;background:#E8F5E9">3–6 min</td>
+  <td class="time-cell" style="color:#2D6A2E;background:#E8F5E9">2–5 min</td>
+  <td class="time-cell" style="color:#B45309;background:#FFF3E0">10–20 min</td>
+  <td class="time-cell" style="color:#B45309;background:#FFF3E0">5–15 min</td>
+  <td class="time-cell" style="color:#B45309;background:#FFF3E0">Variable</td>
+  <td class="time-cell" style="color:#2D6A2E;background:#E8F5E9">Inmediato</td>
+  <td class="time-cell" style="color:#2D6A2E;background:#E8F5E9">Meses</td>
+</tr>
+
+<!-- EVIDENCIA FÍSICA -->
+<tr>
+  <td class="row-label-cell" style="background:#3b6d11"><div class="row-label-title" style="color:#fff">Evidencia física</div><div class="row-label-sub" style="color:#c8e6c9">Lo que el usuario ve o toca</div></td>
+  <td class="cell" style="background:#EAF3DE"><div class="card" style="background:#C0DD97;color:#173404">Sitio web<br>(desktop / mobile)<br>URL de i-Homotic</div></td>
+  <td class="cell" style="background:#EAF3DE"><div class="card" style="background:#C0DD97;color:#173404">Galería de proyectos<br>Slider antes/después<br>Video de recorrido</div></td>
+  <td class="cell" style="background:#EAF3DE"><div class="card" style="background:#C0DD97;color:#173404">Simulador del hogar<br>Quiz «¿Por dónde<br>empiezo?»</div></td>
+  <td class="cell" style="background:#EAF3DE"><div class="card" style="background:#C0DD97;color:#173404">Calculadora PDF<br>Casos de éxito<br>Infografía compartible</div></td>
+  <td class="cell" style="background:#EAF3DE"><div class="card" style="background:#C0DD97;color:#173404">Botón WhatsApp<br>Mensaje predeterminado<br>Link directo a Carlos</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Stand físico EAFIT<br>QR en 3 puntos clave<br>Materiales impresos</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Prototipo físico<br>Pantalla interactiva<br>Recorrido 360°</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Configurador modular<br>Resumen descargable<br>PDF / WhatsApp</div></td>
+  <td class="cell" style="background:#EAF3DE"><div class="card" style="background:#C0DD97;color:#173404">Link compartido<br>Mensaje de WhatsApp<br>OG tags del sitio</div></td>
+  <td class="cell" style="background:#EAF3DE"><div class="card" style="background:#C0DD97;color:#173404">Mapa del ecosistema<br>«Haz crecer<br>tu sistema»</div></td>
+</tr>
+
+<!-- ACCIONES USUARIO (Customer Journey) -->
+<tr>
+  <td class="row-label-cell" style="background:#185FA5"><div class="row-label-title" style="color:#fff">Acciones del usuario</div><div class="row-label-sub" style="color:#B5D4F4">Customer Journey</div></td>
+  <td class="cell" style="background:#E6F1FB"><div class="card" style="background:#B5D4F4;color:#042C53">Llega al sitio web<br>vía Google / Instagram<br>o link de WhatsApp</div></td>
+  <td class="cell" style="background:#E6F1FB"><div class="card" style="background:#B5D4F4;color:#042C53">Navega la galería<br>de proyectos reales<br>Filtra por ciudad/tipo</div></td>
+  <td class="cell" style="background:#E6F1FB"><div class="card" style="background:#B5D4F4;color:#042C53">Explora el simulador<br>de su hogar<br>Realiza el quiz inicial</div></td>
+  <td class="cell" style="background:#E6F1FB"><div class="card" style="background:#B5D4F4;color:#042C53">Configura calculadora<br>Descarga o comparte<br>el PDF de ahorro</div></td>
+  <td class="cell" style="background:#E6F1FB"><div class="card" style="background:#B5D4F4;color:#042C53">Hace clic en<br>«Hablar con asesor»<br>Abre WhatsApp</div></td>
+  <td class="cell" style="background:#FEF3E2;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Escanea QR del stand<br>Llega a experiencia<br>digital desde el stand</div></td>
+  <td class="cell" style="background:#FEF3E2;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Toca el prototipo<br>físico en vivo<br>Ve la demo real</div></td>
+  <td class="cell" style="background:#FEF3E2;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Usa el configurador<br>Arma su paquete<br>Solicita cotización</div></td>
+  <td class="cell" style="background:#E6F1FB"><div class="card" style="background:#B5D4F4;color:#042C53">Comparte resultado<br>con familia<br>Investiga más</div></td>
+  <td class="cell" style="background:#E6F1FB"><div class="card" style="background:#B5D4F4;color:#042C53">Contacta para<br>expandir sistema<br>Refiere a otros</div></td>
+</tr>
+
+<!-- LÍNEA DE INTERACCIÓN -->
+<tr class="line-row">
+  <td class="row-label-cell" style="background:#0C447C;font-size:9px;color:#B5D4F4;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:5px 8px">Línea de interacción</td>
+  <td colspan="10" style="padding:0 0 0 6px;vertical-align:middle">
+    <div style="border-top:2px dashed #185FA5;margin:4px 0"></div>
+  </td>
+</tr>
+
+<!-- FRONTSTAGE -->
+<tr>
+  <td class="row-label-cell" style="background:#0F6E56"><div class="row-label-title" style="color:#fff">Frontstage<br>tecnología</div><div class="row-label-sub" style="color:#9FE1CB">Visible al usuario</div></td>
+  <td class="cell" style="background:#E1F5EE"><div class="card" style="background:#9FE1CB;color:#04342C">Sitio React carga<br>en &lt;3s · Responsive<br>SEO básico activo</div></td>
+  <td class="cell" style="background:#E1F5EE"><div class="card" style="background:#9FE1CB;color:#04342C">Componente galería<br>Slider deslizable<br>Video embed</div></td>
+  <td class="cell" style="background:#E1F5EE"><div class="card" style="background:#9FE1CB;color:#04342C">SVG interactivo<br>del hogar<br>Árbol de decisión quiz</div></td>
+  <td class="cell" style="background:#E1F5EE"><div class="card" style="background:#9FE1CB;color:#04342C">Calculadora React<br>Generación PDF<br>(jsPDF en cliente)</div></td>
+  <td class="cell" style="background:#E1F5EE"><div class="card" style="background:#9FE1CB;color:#04342C">Link wa.me<br>Mensaje prefabricado<br>abre WhatsApp</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">QR dinámico → sitio<br>Banners marca<br>coherente</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Pantalla interactiva<br>Recorrido 360°<br>(Pannellum)</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Configurador React<br>Cálculo en tiempo real<br>Export PDF / WA</div></td>
+  <td class="cell" style="background:#E1F5EE"><div class="card" style="background:#9FE1CB;color:#04342C">Link con URL<br>personalizada<br>OG tags del sitio</div></td>
+  <td class="cell" style="background:#E1F5EE"><div class="card" style="background:#9FE1CB;color:#04342C">Sección «Haz crecer<br>tu sistema»<br>Mapa del ecosistema</div></td>
+</tr>
+
+<!-- LÍNEA DE VISIBILIDAD -->
+<tr class="line-row">
+  <td class="row-label-cell" style="background:#1B2A1B;font-size:9px;color:#9FE1CB;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:5px 8px">Línea de visibilidad</td>
+  <td colspan="10" style="padding:0 0 0 6px;vertical-align:middle">
+    <div style="border-top:3px solid #1B2A1B;margin:4px 0"></div>
+  </td>
+</tr>
+
+<!-- BACKSTAGE -->
+<tr>
+  <td class="row-label-cell" style="background:#3C3489"><div class="row-label-title" style="color:#fff">Backstage<br>acciones</div><div class="row-label-sub" style="color:#CECBF6">Invisible al usuario</div></td>
+  <td class="cell" style="background:#EEEDFE"><div class="card" style="background:#CECBF6;color:#26215C">Hosting activo<br>DNS configurado<br>Analytics activo</div></td>
+  <td class="cell" style="background:#EEEDFE"><div class="card" style="background:#CECBF6;color:#26215C">Repositorio de fotos<br>y videos de proyectos<br>reales de i-Homotic</div></td>
+  <td class="cell" style="background:#EEEDFE"><div class="card" style="background:#CECBF6;color:#26215C">Lógica del quiz<br>Base de paquetes<br>recomendados</div></td>
+  <td class="cell" style="background:#EEEDFE"><div class="card" style="background:#CECBF6;color:#26215C">Datos de ahorro<br>validados por<br>Carlos Lezcano</div></td>
+  <td class="cell" style="background:#EEEDFE"><div class="card" style="background:#CECBF6;color:#26215C">WhatsApp Business<br>de Carlos activo<br>y disponible</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Logística del stand<br>Montaje y materiales<br>Equipo de diseño</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Prototipo físico<br>preparado y probado<br>Contenido 360°</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#FAC775;color:#412402">Catálogo de<br>componentes y<br>precios (Carlos)</div></td>
+  <td class="cell" style="background:#EEEDFE"><div class="card" style="background:#CECBF6;color:#26215C">Analytics activo<br>Registro de<br>interacciones</div></td>
+  <td class="cell" style="background:#EEEDFE"><div class="card" style="background:#CECBF6;color:#26215C">Historial del cliente<br>Registro del proyecto<br>instalado</div></td>
+</tr>
+
+<!-- LÍNEA INTERNA -->
+<tr class="line-row">
+  <td class="row-label-cell" style="background:#3C3489;font-size:9px;color:#CECBF6;letter-spacing:.05em;text-transform:uppercase;text-align:center;padding:5px 8px">Línea interna</td>
+  <td colspan="10" style="padding:0 0 0 6px;vertical-align:middle">
+    <div style="border-top:2px dashed #534AB7;margin:4px 0"></div>
+  </td>
+</tr>
+
+<!-- SOPORTE -->
+<tr>
+  <td class="row-label-cell" style="background:#E8721A"><div class="row-label-title" style="color:#fff">Procesos de soporte</div><div class="row-label-sub" style="color:#fff3e0">Sistemas y aliados</div></td>
+  <td class="cell" style="background:#FFF3E0"><div class="card" style="background:#FAC775;color:#412402">Analytics (Vercel)<br>Logs de visita<br>Google Search</div></td>
+  <td class="cell" style="background:#FFF3E0"><div class="card" style="background:#FAC775;color:#412402">GitHub i-Homotic<br>Repositorio de<br>evidencia visual</div></td>
+  <td class="cell" style="background:#FFF3E0"><div class="card" style="background:#FAC775;color:#412402">Design System Figma<br>Tokens de marca<br>Componentes React</div></td>
+  <td class="cell" style="background:#FFF3E0"><div class="card" style="background:#FAC775;color:#412402">Proyectos reales<br>de i-Homotic como<br>fuente de datos</div></td>
+  <td class="cell" style="background:#FFF3E0"><div class="card" style="background:#FAC775;color:#412402">WhatsApp Business<br>Carlos Lezcano<br>(contacto directo)</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#EF9F27;color:#412402">EAFIT — Feria<br>del Diseño<br>(infraestructura)</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#EF9F27;color:#412402">Showroom físico<br>de i-Homotic<br>(vivienda real)</div></td>
+  <td class="cell" style="background:#FFF3E0;border-left:2px dashed #E8721A"><div class="card" style="background:#EF9F27;color:#412402">Catálogo de<br>productos i-Homotic<br>Precios validados</div></td>
+  <td class="cell" style="background:#FFF3E0"><div class="card" style="background:#FAC775;color:#412402">jsPDF · WhatsApp<br>Share API<br>URL parameters</div></td>
+  <td class="cell" style="background:#FFF3E0"><div class="card" style="background:#FAC775;color:#412402">WhatsApp Business<br>Historial de cliente<br>Voz a voz orgánico</div></td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="insight-bar">
+  <strong>Insights que originan este blueprint:</strong>
+  &nbsp;&nbsp;I1: La confianza se googlea → Fases 1–2
+  &nbsp;·&nbsp; I2: Parálisis por falta de evidencia → Fases 2–4
+  &nbsp;·&nbsp; I3: Expansión gradual → Fases 8–10
+  &nbsp;·&nbsp; I4: Pedagogía como diferencial → Fases 3–4
+  &nbsp;·&nbsp; I5: Ver para creer → Fases 4 y 7
+  <br><span style="font-size:9px;opacity:.7;margin-top:4px;display:block">Las fases 6–8 con borde naranja corresponden al canal físico (Stand Feria del Diseño EAFIT).</span>
+</div>
+
+</div>
