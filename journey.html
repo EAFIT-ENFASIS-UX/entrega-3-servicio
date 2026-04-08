@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Journey Map — i-Homotic</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-dark: #2D6A2E;
+  --green-mid: #4c7b45;
+  --green-light: #d4ebd4;
+  --green-pale: #f0f7f0;
+  --orange: #E8721A;
+  --orange-light: #fdf0e6;
+  --dark: #1a2a1a;
+  --gray: #5a6a5a;
+  --gray-light: #e8ede8;
+  --white: #ffffff;
+  --cream: #fafdf9;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  min-width: 1400px;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--green-dark);
+  padding: 36px 60px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.header-brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.header-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.header-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  font-weight: 300;
+}
+.header-persona {
+  position: absolute;
+  right: 60px; top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 12px;
+  padding: 14px 22px;
+  text-align: right;
+}
+.header-persona .label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 4px;
+}
+.header-persona .name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: #fff;
+}
+.header-persona .desc {
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  margin-top: 2px;
+}
+
+/* ── CANAL BADGE ── */
+.canal-divider {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 60px;
+  margin-top: 0;
+}
+.canal-seg {
+  flex: 1;
+  padding: 10px 0 10px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+}
+.canal-seg.presencial { background: var(--orange); }
+.canal-seg.digital { background: var(--green-mid); }
+.canal-seg-label { opacity: .9; }
+
+/* ── MAIN TABLE ── */
+.cjm-wrap {
+  padding: 0 60px 60px;
+  overflow-x: auto;
+}
+
+table.cjm {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+/* Column widths */
+col.row-label { width: 160px; }
+col.phase-col { width: 200px; }
+
+/* ── ROW LABELS ── */
+.row-label-cell {
+  padding: 0;
+  position: sticky;
+  left: 0;
+  z-index: 20;
+  background: var(--cream);
+}
+.row-label-inner {
+  padding: 14px 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 2px solid var(--green-light);
+}
+.row-label-title {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  line-height: 1.3;
+}
+.row-label-sub {
+  font-size: 9px;
+  color: var(--gray);
+  margin-top: 3px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* ── PHASE HEADER ── */
+.phase-header {
+  text-align: center;
+  padding: 16px 10px 12px;
+  vertical-align: bottom;
+  border-bottom: 2px solid var(--green-dark);
+}
+.phase-num {
+  font-size: 22px;
+  font-family: 'DM Serif Display', serif;
+  color: rgba(45,106,46,.2);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.phase-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green-dark);
+  line-height: 1.3;
+}
+.phase-sub {
+  font-size: 9.5px;
+  color: var(--gray);
+  margin-top: 3px;
+  font-weight: 300;
+}
+.phase-header.stand { border-bottom-color: var(--orange); }
+.phase-header.stand .phase-num { color: rgba(232,114,26,.2); }
+.phase-header.stand .phase-name { color: var(--orange); }
+
+/* ── CELLS ── */
+td.cell {
+  padding: 8px 10px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--green-light);
+  border-right: 1px solid var(--green-light);
+}
+td.cell.stand-col {
+  border-right-color: rgba(232,114,26,.25);
+  border-bottom-color: rgba(232,114,26,.15);
+  background: rgba(232,114,26,.025);
+}
+td.cell:last-child { border-right: none; }
+
+/* ── CARD INSIDE CELL ── */
+.card {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--dark);
+  border: 1px solid var(--green-light);
+  height: 100%;
+  min-height: 70px;
+}
+.card.stand-card {
+  border-color: rgba(232,114,26,.3);
+  background: var(--orange-light);
+}
+.card-text { color: #2a3a2a; }
+
+/* ── EMOTION ROW ── */
+.emotion-row td { padding: 6px 10px; border-bottom: 2px solid var(--green-light); }
+.emotion-row td.stand-col { border-bottom-color: rgba(232,114,26,.25); }
+
+.emotion-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  position: relative;
+}
+.emotion-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  border: 2px solid var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.emotion-label {
+  font-size: 9px;
+  color: var(--gray);
+  text-align: center;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Emotion colors by level */
+.em-high { background: #d4ebd4; }
+.em-mid  { background: #fff3cd; }
+.em-low  { background: #fde8e8; }
+.em-neutral { background: #e8ede8; }
+
+/* ── INSIGHT TAG ── */
+.insight-tag {
+  display: inline-block;
+  font-size: 8.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-top: 6px;
+  letter-spacing: .5px;
+}
+.it-green { background: var(--green-light); color: var(--green-dark); }
+.it-orange { background: var(--orange-light); color: var(--orange); border: 1px solid rgba(232,114,26,.3); }
+
+/* ── OPPORTUNITY ROW ── */
+.opp-row td {
+  padding: 10px 10px;
+  border-bottom: none;
+}
+.opp-card {
+  background: var(--green-dark);
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 10.5px;
+  line-height: 1.45;
+}
+.opp-card.stand-opp {
+  background: var(--orange);
+}
+.opp-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: .6;
+  margin-bottom: 4px;
+}
+
+/* ── CURVE SVG ── */
+.curve-row td {
+  padding: 0 10px;
+  height: 80px;
+  border-bottom: 1px solid var(--green-light);
+  vertical-align: middle;
+}
+.curve-row td.stand-col { border-bottom-color: rgba(232,114,26,.15); }
+
+/* ── SECTION DIVIDERS ── */
+.section-divider td {
+  padding: 4px 0;
+  background: var(--gray-light);
+}
+.section-divider .row-label-cell {
+  background: var(--gray-light);
+}
+
+/* ── CANAL INDICATOR ── */
+.canal-indicator {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.ci-stand { background: var(--orange); }
+.ci-digital { background: var(--green-mid); }
+.ci-both { background: linear-gradient(135deg, var(--orange) 50%, var(--green-mid) 50%); }
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  gap: 24px;
+  padding: 20px 60px;
+  border-top: 1px solid var(--green-light);
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: var(--gray);
+}
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ── EMOTION CURVE ── */
+.curve-container {
+  width: 100%;
+  height: 70px;
+  position: relative;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-brand">i-Homotic × EAFIT · Servicio y Experiencias Interactivas · 2026</div>
+  <div class="header-title">Customer Journey Map</div>
+  <div class="header-subtitle">Recorrido omnicanal: Stand Feria del Diseño → Sitio Web · Explorador Informado</div>
+  <div class="header-persona">
+    <div class="label">Arquetipo</div>
+    <div class="name">El Explorador Informado</div>
+    <div class="desc">Propietario colombiano · 30–55 años · Ingresos medio-altos</div>
+  </div>
+</div>
+
+<!-- CANAL BANNERS -->
+<div style="display:flex; padding: 0 60px; gap:0;">
+  <div style="width:160px; background:#1a2a1a; flex-shrink:0;"></div>
+  <div style="flex:3; background:var(--orange); padding:8px 16px; font-size:9.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.9);">
+    CANAL FÍSICO — Stand Feria del Diseño EAFIT
+  </div>
+  <div style="flex:5; background:var(--green-mid); padding:8px 16px; font-size:9.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.9);">
+    CANAL DIGITAL — Sitio Web i-Homotic
+  </div>
+  <div style="flex:2; background:var(--green-dark); padding:8px 16px; font-size:9.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.9);">
+    POST-FERIA
+  </div>
+</div>
+
+<div class="cjm-wrap">
+<table class="cjm">
+<colgroup>
+  <col class="row-label">
+  <!-- Stand: 3 fases -->
+  <col class="phase-col"><col class="phase-col"><col class="phase-col">
+  <!-- Digital: 5 fases -->
+  <col class="phase-col"><col class="phase-col"><col class="phase-col"><col class="phase-col"><col class="phase-col">
+  <!-- Post: 2 fases -->
+  <col class="phase-col"><col class="phase-col">
+</colgroup>
+
+<tbody>
+
+<!-- ═══ FASE HEADERS ═══ -->
+<tr>
+  <td class="row-label-cell" style="border-bottom:2px solid var(--green-dark);">
+    <div class="row-label-inner" style="border-right:none;">
+      <div class="row-label-title" style="font-size:11px; color:var(--dark);">Fases</div>
+    </div>
+  </td>
+  <!-- STAND -->
+  <td class="phase-header stand">
+    <div class="phase-num">01</div>
+    <div class="phase-name">Primer contacto<br>en el stand</div>
+    <div class="phase-sub">Atracción visual</div>
+  </td>
+  <td class="phase-header stand">
+    <div class="phase-num">02</div>
+    <div class="phase-name">Exploración<br>del stand</div>
+    <div class="phase-sub">Zona pedagógica + demo</div>
+  </td>
+  <td class="phase-header stand">
+    <div class="phase-num">03</div>
+    <div class="phase-name">Escaneo QR /<br>contacto inicial</div>
+    <div class="phase-sub">Puente físico→digital</div>
+  </td>
+  <!-- DIGITAL -->
+  <td class="phase-header">
+    <div class="phase-num">04</div>
+    <div class="phase-name">Llegada al<br>sitio web</div>
+    <div class="phase-sub">Descubrimiento digital</div>
+  </td>
+  <td class="phase-header">
+    <div class="phase-num">05</div>
+    <div class="phase-name">Exploración del<br>portafolio</div>
+    <div class="phase-sub">Validación de evidencia</div>
+  </td>
+  <td class="phase-header">
+    <div class="phase-num">06</div>
+    <div class="phase-name">Comprensión<br>del sistema</div>
+    <div class="phase-sub">Zona pedagógica</div>
+  </td>
+  <td class="phase-header">
+    <div class="phase-num">07</div>
+    <div class="phase-name">Evaluación<br>económica</div>
+    <div class="phase-sub">Estimación de inversión</div>
+  </td>
+  <td class="phase-header">
+    <div class="phase-num">08</div>
+    <div class="phase-name">Decisión de<br>contacto</div>
+    <div class="phase-sub">CTA → WhatsApp</div>
+  </td>
+  <!-- POST -->
+  <td class="phase-header">
+    <div class="phase-num">09</div>
+    <div class="phase-name">Consulta con<br>Carlos</div>
+    <div class="phase-sub">Conversación directa</div>
+  </td>
+  <td class="phase-header">
+    <div class="phase-num">10</div>
+    <div class="phase-name">Decisión de<br>compra</div>
+    <div class="phase-sub">Cierre o espera</div>
+  </td>
+</tr>
+
+<!-- ═══ ACCIONES DEL USUARIO ═══ -->
+<tr>
+  <td class="row-label-cell">
+    <div class="row-label-inner">
+      <div class="row-label-title">Acciones del usuario</div>
+      <div class="row-label-sub">¿Qué hace?</div>
+    </div>
+  </td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text">Ve el stand de i-Homotic en la Feria. Le llama la atención la identidad visual. Se detiene a mirar.</div></div></td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text">Recorre las zonas: lee los paneles, interactúa con la demo, ve los casos de éxito en pantalla. Pregunta a quien atiende el stand.</div></div></td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text">Escanea el QR o toma la tarjeta de contacto. Guarda el número de WhatsApp o abre el sitio web en su celular.</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text">Abre el sitio web (desde el QR del stand o más tarde desde casa). Hace scroll en la página principal.</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text">Entra a la sección de portafolio. Ve los proyectos reales con imágenes, videos y testimonios de clientes.</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text">Usa el simulador o la herramienta pedagógica. Entiende qué le haría la domótica a su casa en particular.</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text">Configura la herramienta de estimación de inversión con sus datos. Ve el rango de costo para su caso. Comparte el resultado con su pareja/familia.</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text">Hace clic en «Hablar con un asesor». Se abre WhatsApp con un mensaje predeterminado que incluye su caso.</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text">Conversa directamente con Carlos Lezcano por WhatsApp o llamada. Recibe una cotización personalizada.</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text">Decide contratar el primer paquete de entrada, pide más tiempo para pensarlo, o lo descarta por el momento.</div></div></td>
+</tr>
+
+<!-- ═══ PENSAMIENTOS ═══ -->
+<tr>
+  <td class="row-label-cell">
+    <div class="row-label-inner">
+      <div class="row-label-title">Pensamientos</div>
+      <div class="row-label-sub">¿Qué piensa?</div>
+    </div>
+  </td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text" style="font-style:italic;">"¿Esto qué es? Se ve interesante y profesional."</div></div></td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text" style="font-style:italic;">"Ah, entonces esto es domótica. No sabía que era tan accesible."</div></div></td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text" style="font-style:italic;">"Quiero mostrarle esto a mi pareja / ver más información después."</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-style:italic;">"Esto se ve serio. Tiene página web. Vale la pena explorar."</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-style:italic;">"Han hecho proyectos reales. Hay fotos, videos, gente real que habla bien de ellos."</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-style:italic;">"Ahora sí entiendo qué podría tener en mi sala, en mi entrada, en mis persianas."</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-style:italic;">"Está dentro de mis posibilidades. Le voy a mostrar esto a mi esposa / me lo guardo para pensarlo."</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-style:italic;">"Quiero hablar con alguien. Tengo preguntas puntuales sobre mi caso."</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-style:italic;">"Carlos responde rápido y conoce el tema. Esto parece confiable."</div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-style:italic;">"Voy a empezar con el paquete básico y ver cómo funciona antes de ampliar."</div></div></td>
+</tr>
+
+<!-- ═══ EMOCIONES ═══ -->
+<tr>
+  <td class="row-label-cell" style="border-bottom: 2px solid var(--green-light);">
+    <div class="row-label-inner">
+      <div class="row-label-title">Emoción</div>
+      <div class="row-label-sub">Temperatura emocional</div>
+    </div>
+  </td>
+  <!-- F1 -->
+  <td class="cell stand-col" style="text-align:center; border-bottom: 2px solid rgba(232,114,26,.25);">
+    <div class="emotion-track"><div class="emotion-dot em-mid">🤔</div></div>
+    <div class="emotion-label">Curiosidad</div>
+  </td>
+  <!-- F2 -->
+  <td class="cell stand-col" style="text-align:center; border-bottom: 2px solid rgba(232,114,26,.25);">
+    <div class="emotion-track"><div class="emotion-dot em-high">😊</div></div>
+    <div class="emotion-label">Interés creciente</div>
+  </td>
+  <!-- F3 -->
+  <td class="cell stand-col" style="text-align:center; border-bottom: 2px solid rgba(232,114,26,.25);">
+    <div class="emotion-track"><div class="emotion-dot em-high">🙂</div></div>
+    <div class="emotion-label">Apertura</div>
+  </td>
+  <!-- F4 -->
+  <td class="cell" style="text-align:center;">
+    <div class="emotion-track"><div class="emotion-dot em-mid">🧐</div></div>
+    <div class="emotion-label">Evaluación</div>
+  </td>
+  <!-- F5 -->
+  <td class="cell" style="text-align:center;">
+    <div class="emotion-track"><div class="emotion-dot em-high">😌</div></div>
+    <div class="emotion-label">Confianza inicial</div>
+  </td>
+  <!-- F6 -->
+  <td class="cell" style="text-align:center;">
+    <div class="emotion-track"><div class="emotion-dot em-high">💡</div></div>
+    <div class="emotion-label">Comprensión</div>
+  </td>
+  <!-- F7 -->
+  <td class="cell" style="text-align:center;">
+    <div class="emotion-track"><div class="emotion-dot em-mid">🤞</div></div>
+    <div class="emotion-label">Incertidumbre / cálculo</div>
+  </td>
+  <!-- F8 -->
+  <td class="cell" style="text-align:center;">
+    <div class="emotion-track"><div class="emotion-dot em-high">✅</div></div>
+    <div class="emotion-label">Resolución</div>
+  </td>
+  <!-- F9 -->
+  <td class="cell" style="text-align:center;">
+    <div class="emotion-track"><div class="emotion-dot em-high">😀</div></div>
+    <div class="emotion-label">Confianza alta</div>
+  </td>
+  <!-- F10 -->
+  <td class="cell" style="text-align:center;">
+    <div class="emotion-track"><div class="emotion-dot em-high">🎉</div></div>
+    <div class="emotion-label">Satisfacción / expectativa</div>
+  </td>
+</tr>
+
+<!-- CURVA SVG -->
+<tr>
+  <td class="row-label-cell" style="border-bottom: 2px solid var(--green-light);">
+    <div class="row-label-inner">
+      <div class="row-label-title">Curva emocional</div>
+    </div>
+  </td>
+  <td colspan="10" style="padding:0; border-bottom: 2px solid var(--green-light);">
+    <svg viewBox="0 0 2000 80" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:70px; display:block;">
+      <defs>
+        <linearGradient id="curveGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#E8721A" stop-opacity=".3"/>
+          <stop offset="30%" stop-color="#E8721A" stop-opacity=".1"/>
+          <stop offset="31%" stop-color="#2D6A2E" stop-opacity=".1"/>
+          <stop offset="100%" stop-color="#2D6A2E" stop-opacity=".2"/>
+        </linearGradient>
+      </defs>
+      <!-- zona stand -->
+      <rect x="0" y="0" width="600" height="80" fill="rgba(232,114,26,.04)"/>
+      <!-- curva path: puntos = fases 1-10, mapeados a Y (bajo=mal, alto=bien) -->
+      <!-- y: 0=top(bien), 80=bottom(mal). Valores: F1=55,F2=30,F3=35,F4=45,F5=25,F6=22,F7=40,F8=20,F9=15,F10=12 -->
+      <path d="M100,55 C150,55 170,30 200,30 C230,30 250,35 300,35 C350,35 380,45 400,45 C450,45 500,25 600,25 C650,25 680,22 800,22 C850,22 900,40 1000,40 C1050,40 1100,20 1200,20 C1300,20 1350,15 1600,15 C1700,15 1800,12 1900,12"
+        fill="none" stroke="url(#curveGrad)" stroke-width="3" stroke-linecap="round"/>
+      <!-- puntos -->
+      <circle cx="100" cy="55" r="5" fill="#E8721A"/>
+      <circle cx="300" cy="30" r="5" fill="#E8721A"/>
+      <circle cx="500" cy="35" r="5" fill="#E8721A"/>
+      <circle cx="700" cy="45" r="5" fill="#4c7b45"/>
+      <circle cx="900" cy="25" r="5" fill="#4c7b45"/>
+      <circle cx="1100" cy="22" r="5" fill="#4c7b45"/>
+      <circle cx="1300" cy="40" r="5" fill="#4c7b45"/>
+      <circle cx="1500" cy="20" r="5" fill="#4c7b45"/>
+      <circle cx="1700" cy="15" r="5" fill="#2D6A2E"/>
+      <circle cx="1900" cy="12" r="5" fill="#2D6A2E"/>
+      <!-- labels -->
+      <text x="8" y="10" font-size="8" fill="#888" font-family="DM Sans,sans-serif">+ positivo</text>
+      <text x="8" y="75" font-size="8" fill="#888" font-family="DM Sans,sans-serif">− neutro</text>
+      <!-- linea divisoria stand/digital -->
+      <line x1="600" y1="0" x2="600" y2="80" stroke="rgba(232,114,26,.4)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>
+  </td>
+</tr>
+
+<!-- ═══ PUNTOS DE DOLOR ═══ -->
+<tr>
+  <td class="row-label-cell">
+    <div class="row-label-inner">
+      <div class="row-label-title">Puntos de dolor</div>
+      <div class="row-label-sub">Fricciones / riesgos</div>
+    </div>
+  </td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text" style="font-size:10.5px;">Si el stand no tiene identidad visual clara, el usuario lo ignora sin detenerse.</div><div><span class="insight-tag it-orange">Insight 1</span></div></div></td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text" style="font-size:10.5px;">Si el lenguaje es técnico o la demo es confusa, el usuario se desconecta antes de entender el valor.</div><div><span class="insight-tag it-orange">Insight 4</span></div></div></td>
+  <td class="cell stand-col"><div class="card stand-card"><div class="card-text" style="font-size:10.5px;">Si el QR no funciona o lleva a una página que no carga bien en móvil, se pierde el puente omnicanal.</div><div><span class="insight-tag it-orange">Insight 1</span></div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-size:10.5px;">Si el sitio se ve genérico, sin proyectos reales visibles desde el primer scroll, el usuario rebota.</div><div><span class="insight-tag it-green">Insight 1</span></div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-size:10.5px;">Sin testimonios verificables ni indicadores de tiempo post-instalación, persiste la desconfianza.</div><div><span class="insight-tag it-green">Insight 2</span></div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-size:10.5px;">Si la información asume conocimiento técnico previo, el usuario no entiende qué está viendo y abandona.</div><div><span class="insight-tag it-green">Insight 4</span></div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-size:10.5px;">Si no puede estimar la inversión por sí mismo, siente que está comprando una promesa sin precio.</div><div><span class="insight-tag it-green">Insight 5</span></div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-size:10.5px;">Si el CTA lleva a un formulario o chatbot, el usuario lo cierra. Espera contacto humano directo.</div><div><span class="insight-tag it-green">Insight 2</span></div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-size:10.5px;">Si Carlos tarda en responder o el tono no es cercano, la confianza construida se puede perder.</div><div><span class="insight-tag it-green">Insight 3</span></div></div></td>
+  <td class="cell"><div class="card"><div class="card-text" style="font-size:10.5px;">Si no hay opción de "paquete de entrada" asequible, el usuario no da el primer paso aunque quiera.</div><div><span class="insight-tag it-green">Insight 3</span></div></div></td>
+</tr>
+
+<!-- ═══ TOUCHPOINTS ═══ -->
+<tr>
+  <td class="row-label-cell">
+    <div class="row-label-inner">
+      <div class="row-label-title">Touchpoints</div>
+      <div class="row-label-sub">Puntos de contacto</div>
+    </div>
+  </td>
+  <td class="cell stand-col"><div class="card stand-card" style="font-size:10.5px;">Ambientación visual del stand · Banner de marca · Zona de atracción</div></td>
+  <td class="cell stand-col"><div class="card stand-card" style="font-size:10.5px;">Paneles pedagógicos · Demo interactiva · Pantalla con casos de éxito · Persona que atiende</div></td>
+  <td class="cell stand-col"><div class="card stand-card" style="font-size:10.5px;">Código QR · Tarjeta de contacto con WhatsApp · URL del sitio web impresa</div></td>
+  <td class="cell"><div class="card" style="font-size:10.5px;">Página principal del sitio web · Navegación responsive · Carga rápida</div></td>
+  <td class="cell"><div class="card" style="font-size:10.5px;">Sección portafolio · Galería de proyectos · Videos · Testimonios · Slider antes/después</div></td>
+  <td class="cell"><div class="card" style="font-size:10.5px;">Herramienta pedagógica interactiva · Simulador de hogar · Quiz «¿por dónde empiezo?»</div></td>
+  <td class="cell"><div class="card" style="font-size:10.5px;">Herramienta de estimación de inversión · Resultado compartible por WhatsApp</div></td>
+  <td class="cell"><div class="card" style="font-size:10.5px;">Botón de contacto directo · WhatsApp con mensaje predeterminado</div></td>
+  <td class="cell"><div class="card" style="font-size:10.5px;">Chat de WhatsApp con Carlos · Llamada · Cotización personalizada</div></td>
+  <td class="cell"><div class="card" style="font-size:10.5px;">Propuesta comercial · Primer paquete de entrada · Posibilidad de expansión futura</div></td>
+</tr>
+
+<!-- ═══ OPORTUNIDADES DE DISEÑO ═══ -->
+<tr class="opp-row">
+  <td class="row-label-cell" style="background:var(--cream);">
+    <div class="row-label-inner">
+      <div class="row-label-title" style="color:var(--white); background:var(--green-dark); padding:6px 10px; border-radius:6px; font-size:9px;">Oportunidad<br>de diseño</div>
+    </div>
+  </td>
+  <td class="cell stand-col" style="background:rgba(232,114,26,.04);">
+    <div class="opp-card stand-opp">
+      <div class="opp-label">Oportunidad</div>
+      Impacto visual inmediato que comunique «tecnología colombiana accesible» antes de leer una sola palabra.
+    </div>
+  </td>
+  <td class="cell stand-col" style="background:rgba(232,114,26,.04);">
+    <div class="opp-card stand-opp">
+      <div class="opp-label">Oportunidad</div>
+      Zona pedagógica con lenguaje cotidiano y demo que el visitante puede operar solo, sin necesitar a nadie.
+    </div>
+  </td>
+  <td class="cell stand-col" style="background:rgba(232,114,26,.04);">
+    <div class="opp-card stand-opp">
+      <div class="opp-label">Oportunidad</div>
+      QR que lleva directamente a la herramienta más relevante (quiz o simulador), no a la página principal.
+    </div>
+  </td>
+  <td class="cell">
+    <div class="opp-card">
+      <div class="opp-label">Oportunidad</div>
+      Hero con video corto de proyecto real. Proyectos visibles en el primer scroll sin necesidad de navegar.
+    </div>
+  </td>
+  <td class="cell">
+    <div class="opp-card">
+      <div class="opp-label">Oportunidad</div>
+      Testimonios con foto, ciudad e indicador de tiempo («8 meses sin fallas»). Verificabilidad explícita.
+    </div>
+  </td>
+  <td class="cell">
+    <div class="opp-card">
+      <div class="opp-label">Oportunidad</div>
+      Simulador con plano de hogar interactivo en SVG. El usuario «ve» los cambios en su propia tipología de vivienda.
+    </div>
+  </td>
+  <td class="cell">
+    <div class="opp-card">
+      <div class="opp-label">Oportunidad</div>
+      Resultado compartible con un clic. La familia entera puede ver la estimación sin necesidad de contexto adicional.
+    </div>
+  </td>
+  <td class="cell">
+    <div class="opp-card">
+      <div class="opp-label">Oportunidad</div>
+      Mensaje predeterminado de WhatsApp que ya incluye: tipo de vivienda, interés y rango de inversión estimado.
+    </div>
+  </td>
+  <td class="cell">
+    <div class="opp-card">
+      <div class="opp-label">Oportunidad</div>
+      Respuesta de Carlos en máximo 2 horas. Tono personal, no corporativo. Propuesta por escrito con imágenes.
+    </div>
+  </td>
+  <td class="cell">
+    <div class="opp-card">
+      <div class="opp-label">Oportunidad</div>
+      Mapa del ecosistema «Haz crecer tu sistema»: mostrar cómo el paquete inicial se expande en el tiempo.
+    </div>
+  </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- LEYENDA E INSIGHTS -->
+<div style="padding: 24px 60px 0; border-top: 2px solid var(--green-light);">
+  <div style="display:flex; gap:48px; flex-wrap:wrap; align-items:flex-start;">
+
+    <div>
+      <div style="font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:10px;">Canales</div>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <div style="display:flex; align-items:center; gap:8px; font-size:11px; color:var(--gray);">
+          <div style="width:14px;height:14px;border-radius:3px;background:var(--orange);flex-shrink:0;"></div>
+          Canal físico — Stand Feria del Diseño EAFIT (fases 1–3)
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:11px; color:var(--gray);">
+          <div style="width:14px;height:14px;border-radius:3px;background:var(--green-mid);flex-shrink:0;"></div>
+          Canal digital — Sitio web i-Homotic (fases 4–8)
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:11px; color:var(--gray);">
+          <div style="width:14px;height:14px;border-radius:3px;background:var(--green-dark);flex-shrink:0;"></div>
+          Post-feria — Conversación directa (fases 9–10)
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:10px;">Insights de investigación</div>
+      <div style="display:flex; flex-direction:column; gap:5px;">
+        <div style="font-size:10.5px; color:var(--dark);"><span style="font-weight:600; color:var(--green-dark);">I1</span> — La confianza se googlea: el usuario descarta proveedores sin evidencia digital real</div>
+        <div style="font-size:10.5px; color:var(--dark);"><span style="font-weight:600; color:var(--green-dark);">I2</span> — Parálisis por falta de evidencia: sin validación de terceros, prefiere esperar</div>
+        <div style="font-size:10.5px; color:var(--dark);"><span style="font-weight:600; color:var(--green-dark);">I3</span> — Expansión gradual: necesita probar antes de ampliar, prefiere paquetes de entrada</div>
+        <div style="font-size:10.5px; color:var(--dark);"><span style="font-weight:600; color:var(--green-dark);">I4</span> — Pedagogía como diferencial: nadie le explica por dónde empezar</div>
+        <div style="font-size:10.5px; color:var(--dark);"><span style="font-weight:600; color:var(--green-dark);">I5</span> — Ver para creer: sin evidencia visual concreta, está comprando una promesa vacía</div>
+      </div>
+    </div>
+
+    <div style="margin-left:auto; text-align:right;">
+      <div style="font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-dark);">i-Homotic</div>
+      <div style="font-size:10px; color:var(--gray); margin-top:2px;">Customer Journey Map · EAFIT 2026</div>
+      <div style="font-size:9.5px; color:var(--gray); margin-top:2px; font-style:italic;">Andrea · Ioav · Laura · Laura Ruiz · Sofía · Juan Camilo</div>
+    </div>
+
+  </div>
+</div>
+
+<div style="height: 40px;"></div>
+
+</body>
+</html>
